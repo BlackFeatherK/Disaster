@@ -10,7 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118074554) do
+ActiveRecord::Schema.define(version: 20161118093648) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_topics", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_topicships", force: :cascade do |t|
+    t.integer  "topic_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_category_topicships_on_category_id"
+    t.index ["topic_id"], name: "index_category_topicships_on_topic_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "c_content"
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_comments_on_topic_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "topic_categoryships", force: :cascade do |t|
+    t.integer  "topic_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_topic_categoryships_on_category_id"
+    t.index ["topic_id"], name: "index_topic_categoryships_on_topic_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "t_title"
+    t.text     "t_content"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_topics_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

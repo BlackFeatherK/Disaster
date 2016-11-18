@@ -1,0 +1,10 @@
+<div class="container">
+	<h2>New Topic</h2>
+
+	<%= form_for @topic , :url => topics_path , :method => :post do |f| %>
+		<%= render :partial => "form" , :locals => {:f => f} %>
+		<%= link_to "Cancel" , topics_path , :class => "btn btn-primary" %>
+	<% end %>
+</div>
+	
+

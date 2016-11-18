@@ -1,0 +1,21 @@
+<div class="container">
+	<h2>Show</h2>
+
+	<%= form_for @topic , :url => edit_topic_path(@topic) do |f| %>
+		<%= link_to "Reply" , new_topic_comment_path(@topic) , :class => "btn btn-warning" %>
+		<div class="btn pull-right">
+			<%= link_to "Edit" , edit_topic_path(@topic) , :class => "btn btn-success" %>
+			<%= link_to "Delete" , topic_path(@topic) , :method => :delete , :class => "btn btn-danger" %>
+		</div>
+			
+		<div class="form-group">
+			<%= f.label :t_title , "Title : " %>
+			<%= f.text_field :t_title , :disabled => "disabled" , :class => "form-control" %>
+		</div>
+		<div class="form-group">
+			<%= f.label :t_content , "Content : " %>
+			<%= f.text_area :t_content , :rows => "10" , :disabled => "disabled" , :class => "form-control" %>
+		</div>
+	<% end %>
+</div>
+	
