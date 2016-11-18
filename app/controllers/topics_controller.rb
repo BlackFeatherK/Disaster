@@ -5,10 +5,12 @@ class TopicsController < ApplicationController
 
 	def index
 		@topics = Topic.all.page(params[:page]).per(15)
+		@categories = Category.all
 	end
 
 	def show
-
+		@comments = @topic.comments
+		@category = @topic.category
 	end
 
 	def new 
@@ -17,6 +19,7 @@ class TopicsController < ApplicationController
 	end
 
 	def create
+		authenticate_user!
 		@topic = Topic.new(write_topic)
 		if @topic.save
 			flash[:notice] = "新增成功"
@@ -49,7 +52,7 @@ class TopicsController < ApplicationController
 	private
 
 	def write_topic
-		params.require(:topic).permit(:t_title , :t_content , :user_id)
+		params.require(:topic).permit(:t_title , :t_content , :user_id , :category_id )
 	end
 
 	def find_topic

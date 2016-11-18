@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 	root :to => "topics#index"
 
 	resources :topics do
-		resources :comments
+		resources :comments , :controller => "topic_comments"
 	end
 
 	resources :users

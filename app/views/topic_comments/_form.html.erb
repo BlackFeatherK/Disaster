@@ -1,0 +1,14 @@
+<% if @comment.errors.any? %>
+	<ul>
+		<% @comment.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<div class="form-group">
+	<%= f.label :c_content , "Content : " %>
+	<%= f.text_area :c_content , :rows => "15" , :class => "form-control"%>
+</div>
+<%= f.hidden_field :user_id , :value => @user.id %>
+<%= f.submit :class => "btn btn-success" %>
