@@ -1,23 +1,17 @@
 <div class="container">
 	<h1>Disaster</h1>
-
 	<%= link_to "New Topic" , new_topic_path , :class => "btn btn-primary" %>
-
 	<%= paginate @topics %>
-
 	<table class="table table-striped">
 		<tr>
 			<th class="col-md-10">Title</th>
 			<th class="col-md-2">Create Time</th>
 		</tr>
-
-		
 		<% @topics.each do |t| %>
 			<tr>
 				<td><%= link_to t.t_title , topic_path(t) %></td>
 				<td><%= t.created_at %></td>
 			</tr>
 		<% end %>
-		
 	</table>	
 </div>
