@@ -9,6 +9,7 @@ class TopicCommentsController < ApplicationController
 
 	def create
 		@comment = @topic.comments.build(write_comment)
+		@comment.user = current_user
 		if @comment.save
 			flash[:notice] = "回覆成功"
 			redirect_to topic_path(@topic)
@@ -18,7 +19,7 @@ class TopicCommentsController < ApplicationController
 	end
 
 	def destroy
-		@comment = Comment.find(params[:id])
+		@comment = current_user.comments.find(params[:id])
 		@comment.destroy
 		flash[:alert] = "刪除成功"
 		redirect_to topic_path(@topic)
@@ -27,7 +28,8 @@ class TopicCommentsController < ApplicationController
 	private
 
 	def write_comment
-		params.require(:comment).permit(:c_content , :user_id)
+		# 不應該透過params傳遞user_id 不然有被篡改的可能
+		params.require(:comment).permit(:c_content)
 	end
 
 	def find_topic

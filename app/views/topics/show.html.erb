@@ -2,8 +2,6 @@
 <br>
 	<%= link_to "Back To List" , topics_path , :class => "btn btn-primary pull-right" %>
 	<h2>Topic : </h2>
-
-	<%= form_for @topic , :url => edit_topic_path(@topic) do |f| %>
 		<%= link_to "Reply" , new_topic_comment_path(@topic) , :class => "btn btn-warning" %>
 		<div class="btn pull-right">
 			<% if current_user == @topic.user %>
@@ -11,14 +9,12 @@
 				<%= link_to "Delete" , topic_path(@topic) , :method => :delete , :class => "btn btn-danger" %>
 			<% end %>
 		</div>
-			
 		<div class="form-group">
 			<h4>Category : </h4>
 			<%= @category.name %>
-			
-			
 		</div>
-
+  <!--form包抄連結不會有問題 但不小心包到button可能會出錯 因此其實包在這個位置就好了-->
+  <%= form_for @topic , :url => edit_topic_path(@topic) do |f| %>
 		<div class="form-group">
 			<%= f.label :t_title , "Title : " %>
 			<%= f.text_field :t_title , :disabled => "disabled" , :class => "form-control" %>
@@ -43,9 +39,5 @@
 			<% end %>
 		<% end %>
 	<% end %>
-		
-
-
-
 </div>
 	
